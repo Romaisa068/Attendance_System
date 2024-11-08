@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "53976330049",
+    "project_id": "attendsystem-26dbc",
+    "storage_bucket": "attendsystem-26dbc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53976330049:android:7ae956855856386d0d7bc0",
+        "android_client_info": {
+          "package_name": "com.example.attend_system"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOoMjYEUkUzUlmprC4CAlEhXPh_hx5gAk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
