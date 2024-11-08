@@ -17,6 +17,8 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final FirebaseServices _auth = FirebaseServices();
 
+  bool isLoading = false;
+
   final _name = TextEditingController();
   final _email = TextEditingController();
   final _password = TextEditingController();
@@ -35,11 +37,24 @@ class _SignupScreenState extends State<SignupScreen> {
     String email = _email.text;
     String password = _password.text;
 
-    User? user = await _auth.signUpwithEmailPassword(email, password, username);
-    if (user != null) {
-      Navigator.pushNamed(context, LoginScreen.id);
-    } else {
+    setState(() {
+      isLoading = true;
+    });
+
+    try {
+      await Future.delayed(Duration(seconds: 2));
+
+      User? user =
+          await _auth.signUpwithEmailPassword(email, password, username);
+      if (user != null) {
+        Navigator.pushNamed(context, LoginScreen.id);
+      }
+    } catch (e) {
       print('Sign up failed');
+    } finally {
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -97,10 +112,14 @@ class _SignupScreenState extends State<SignupScreen> {
             const SizedBox(
               height: 18.0,
             ),
-            ReuseableButton(
-                text: 'Sign Up',
-                onPressed: signUp,
-                backgroundColor: Colors.lightBlue),
+            Center(
+              child: isLoading
+                  ? const CircularProgressIndicator()
+                  : ReuseableButton(
+                      text: 'Sign Up',
+                      onPressed: signUp,
+                      backgroundColor: Colors.lightBlue),
+            ),
             TextButton(
               onPressed: () {
                 Navigator.pushNamed(context, LoginScreen.id);

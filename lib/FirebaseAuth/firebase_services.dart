@@ -72,7 +72,13 @@ class FirebaseServices {
           return; // Exit early to prevent multiple marks for the same day
         }
 
-        int count = attendanceSnapshot.docs.length + 1;
+        QuerySnapshot allAttendanceSnapshot = await _firestore
+            .collection('users')
+            .doc(userid)
+            .collection('attendance')
+            .get();
+
+        int count = allAttendanceSnapshot.docs.length + 1;
 
         await _firestore
             .collection('users')
